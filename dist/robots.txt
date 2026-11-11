@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+Disallow: /editor.html
+Sitemap: https://malikusmandev.vercel.app/sitemap.xml

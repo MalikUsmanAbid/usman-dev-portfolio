@@ -6,6 +6,8 @@ A responsive personal portfolio built with **HTML, CSS and JavaScript**. Explore
 
 ![Usman Dev — Build, Solve, Improve](docs/images/usman-dev-banner.svg)
 
+**[Live portfolio](https://malikusmandev.vercel.app) · [Portfolio Studio](https://malikusmandev.vercel.app/editor.html)**
+
 ## Features
 
 - Cream-to-dark introduction, animated notebook role card and original owner branding.
@@ -57,7 +59,7 @@ You can also edit `dist/content.js` directly. All personal details, links, proje
 
 Import this repository, select the **Other** framework preset and use the repository root. The included `vercel.json` serves the `dist` directory without build or install steps. Production Git deployments publish the configured production branch.
 
-The requested `usmandev.vercel.app` address was already in use by another account when checked; the final assigned production address is recorded after deployment.
+Production address: **https://malikusmandev.vercel.app**. Connected Git repository: `MalikUsmanAbid/usman-dev-portfolio`; production branch: `main`.
 
 ## Source map
 
