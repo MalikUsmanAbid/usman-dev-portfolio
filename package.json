@@ -1,0 +1,12 @@
+{
+  "name": "usman-dev-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Usman Dev personal portfolio and browser-local content studio",
+  "scripts": {
+    "check": "node scripts/check.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
