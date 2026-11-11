@@ -50,8 +50,8 @@ function renderLists() {
     categories.append(category);
   });
 }
-function renderProfile() { ['name', 'intro', 'email', 'photo', 'whatsapp', 'logo'].forEach(key => { document.querySelector('#' + key).value = model[key] || ''; }); }
-['name', 'intro', 'email', 'photo', 'whatsapp', 'logo'].forEach(key => document.querySelector('#' + key).addEventListener('input', event => { model[key] = event.target.value; message('Unsaved changes. Save a browser draft or download your updated content.'); }));
+function renderProfile() { ['name', 'intro', 'email', 'photo', 'whatsapp', 'logo', 'resume'].forEach(key => { document.querySelector('#' + key).value = model[key] || ''; }); }
+['name', 'intro', 'email', 'photo', 'whatsapp', 'logo', 'resume'].forEach(key => document.querySelector('#' + key).addEventListener('input', event => { model[key] = event.target.value; message('Unsaved changes. Save a browser draft or download your updated content.'); }));
 function validate() { if (!document.querySelector('#studio').reportValidity()) { message('Please complete required fields and check your links.', true); return false; } if (!validModel(model)) { message('This content is incomplete or too large. Check the fields and try again.', true); return false; } return true; }
 function save() { if (!validate()) return false; try { localStorage.setItem(storageKey, JSON.stringify(model)); message('Draft saved in this browser. The published website is unchanged.'); return true; } catch { message('Could not save in this browser. Download a JSON backup or content.js to keep your changes.', true); return false; } }
 document.querySelector('#studio').addEventListener('submit', event => { event.preventDefault(); save(); });

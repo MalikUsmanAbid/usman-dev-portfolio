@@ -1,8 +1,8 @@
 // Edit in Portfolio Studio or update this configuration.
 window.PORTFOLIO = {
   "name": "Usman Dev",
-  "intro": "I build things for the web. Thoughtful interfaces, playful interactions, and a little bit of magic.",
-  "photo": "usman-photo.png",
+  "intro": "Junior software developer and Computer Science student building practical web, Python, desktop and Android applications.",
+  "photo": "images/branding/usman-portrait-900.webp",
   "email": "usmandev234@gmail.com",
   "links": [
     {
@@ -20,23 +20,35 @@ window.PORTFOLIO = {
   ],
   "skills": [
     {
-      "name": "HTML",
-      "description": "Semantic structure and accessible page foundations."
+      "name": "Languages",
+      "description": "Python, JavaScript, TypeScript, HTML5, CSS3, SQL and Kotlin."
     },
     {
-      "name": "CSS",
-      "description": "Responsive layouts, visual styling and animation."
+      "name": "Frontend",
+      "description": "React, Vite, responsive layouts, UI components and Tailwind CSS fundamentals."
     },
     {
-      "name": "JavaScript",
-      "description": "Interactive interfaces and browser applications."
+      "name": "Backend & APIs",
+      "description": "FastAPI, REST API integration, Vercel Functions and Firebase Authentication."
+    },
+    {
+      "name": "Databases",
+      "description": "SQLite, Firebase Cloud Firestore, Supabase and relational database design."
+    },
+    {
+      "name": "Desktop & Mobile",
+      "description": "Python Tkinter, Tauri, Kotlin, Jetpack Compose and Android development."
+    },
+    {
+      "name": "Tools & Practices",
+      "description": "Git, GitHub, VS Code, Vercel, Cloudflare, debugging, testing and technical documentation."
     }
   ],
   "roles": [
-    "Web Developer",
-    "HTML Developer",
-    "CSS Developer",
-    "JavaScript Developer"
+    "Software Developer",
+    "Full-Stack Developer",
+    "Python Developer",
+    "Web Developer"
   ],
   "doors": [
     {
@@ -236,5 +248,14 @@ window.PORTFOLIO = {
     }
   ],
   "whatsapp": "+923157543808",
-  "logo": "usman-dev-logo.png"
+  "logo": "images/branding/usman-logo-128.webp",
+  "fullName": "Usman Abid",
+  "about": {
+    "heading": "A curious mind. Practical software.",
+    "summary": "I’m Usman Abid, a self-taught developer and Computer Science student from Faisalabad. I work on business-focused web applications, Python tools, desktop software and Android projects, with an interest in maintainable code and useful real-world solutions.",
+    "location": "Faisalabad, Punjab, Pakistan",
+    "education": "Intermediate in Computer Science (ICS) — in progress",
+    "languages": "Urdu — native · English — intermediate"
+  },
+  "resume": "documents/usman-abid-cv.pdf"
 };

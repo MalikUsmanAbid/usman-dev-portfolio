@@ -11,6 +11,8 @@ const data=context.window.PORTFOLIO;
 assert.equal(data.name,'Usman Dev');
 assert.equal(data.email,'usmandev234@gmail.com');
 assert.equal(data.whatsapp,'+923157543808');
+assert.ok(fs.existsSync(path.join(dist,data.resume)),'Missing downloadable CV');
+for(const css of ['style.css','editor.css']) assert.ok(!fs.readFileSync(path.join(dist,css),'utf8').includes('fonts.googleapis.com'),'External font loading returned');
 for(const asset of [data.photo,data.logo]) assert.ok(fs.existsSync(path.join(dist,asset)),`Missing branding asset: ${asset}`);
 let galleryCount=0;
 for(const door of data.doors) for(const project of door.projects){

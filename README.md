@@ -15,6 +15,7 @@ A responsive personal portfolio built with **HTML, CSS and JavaScript**. Explore
 - Four real GitHub projects with **five original visual guides each**.
 - Data-driven skills, profile links and experience chapters.
 - Email, WhatsApp, Facebook and GitHub contact links.
+- About, education and expanded skill groups from the owner's supplied CV, plus a downloadable two-page CV PDF.
 - Portfolio Studio: add/edit/remove projects and skills, preview a browser draft, import/export JSON and download updated content.
 - Keyboard navigation, responsive layouts, accessible labels and reduced-motion support.
 - Static hosting: no server, database or runtime dependency required.
@@ -60,6 +61,12 @@ You can also edit `dist/content.js` directly. All personal details, links, proje
 Import this repository, select the **Other** framework preset and use the repository root. The included `vercel.json` serves the `dist` directory without build or install steps. Production Git deployments publish the configured production branch.
 
 Production address: **https://malikusmandev.vercel.app**. Connected Git repository: `MalikUsmanAbid/usman-dev-portfolio`; production branch: `main`.
+
+## Loading and motion
+
+The live page uses responsive WebP portraits (about 25-57 KB), a 3 KB header logo and a small favicon. Original PNGs remain in the repository for safekeeping but are not the normal page-loading assets. DM Sans and Manrope Latin variable fonts are served locally with swap/preload; their OFL licenses are included in `dist/fonts/`. Below-fold project imagery is lazy-loaded. The rotating notebook has a stable width, and scroll updates avoid unchanged DOM writes. Reduced motion keeps the role label and door transforms stable.
+
+Responsive browser checks cover 320, 360, 390, 768, 1024 and 1440 px widths, project doors, mobile navigation, overflow, role-label fit, reduced motion and Studio content validation. Device emulation is used; physical-phone testing is separate.
 
 ## Source map
 

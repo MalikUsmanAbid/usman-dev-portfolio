@@ -8,8 +8,8 @@ document.querySelectorAll('[data-name]').forEach(el => { el.textContent = data.n
 document.title = `${data.name} — Portfolio`;
 $('#intro').textContent = data.intro;
 $('#copyright-year').textContent = new Date().getFullYear();
-document.querySelectorAll('.wordmark').forEach(brand => { const logo = document.createElement('img'); logo.src = data.logo || 'usman-dev-logo.png'; logo.alt = 'Usman Dev logo'; logo.className = 'brand-logo'; logo.width = 56; logo.height = 56; brand.prepend(logo); });
-if (data.photo) { $('#portrait').src = data.photo; $('#portrait').alt = `Portrait of ${data.name}`; $('.portrait-label').hidden = true; }
+document.querySelectorAll('.wordmark').forEach(brand => { const existing = brand.querySelector('.brand-logo'); if (existing) { existing.src = data.logo || 'images/branding/usman-logo-128.webp'; return; } const logo = document.createElement('img'); logo.src = data.logo || 'usman-dev-logo.png'; logo.alt = 'Usman Dev logo'; logo.className = 'brand-logo'; logo.width = 56; logo.height = 56; brand.prepend(logo); });
+if (data.photo) { const portrait = $('#portrait'); if (data.photo !== portrait.getAttribute('src')) { portrait.removeAttribute('srcset'); portrait.removeAttribute('sizes'); portrait.src = data.photo; } portrait.alt = `Portrait of ${data.name}`; $('.portrait-label').hidden = true; }
 for (let i = 0; i < 14; i++) $('.spirals').append(document.createElement('i'));
 const roles = data.roles.length ? data.roles : ['Web Developer'];
 let roleIndex = 0;
@@ -20,18 +20,20 @@ setInterval(() => {
   setTimeout(() => { roleIndex = (roleIndex + 1) % roles.length; $('#role').textContent = roles[roleIndex]; $('#role').classList.remove('switching'); }, 330);
 }, 2400);
 let manualTheme = false;
-function setTheme(dark) { $('.hero').classList.toggle('dark-hero', dark); $('.theme-toggle').setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme'); }
+let currentTheme = null;
+function setTheme(dark) { if (currentTheme === dark) return; currentTheme = dark; $('.hero').classList.toggle('dark-hero', dark); $('.theme-toggle').setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme'); }
 $('.theme-toggle').addEventListener('click', () => { manualTheme = true; setTheme(!$('.hero').classList.contains('dark-hero')); });
 const menu = $('.menu-toggle');
 function closeMenu() { $('#navigation').classList.remove('open'); menu.setAttribute('aria-expanded', 'false'); }
 menu.addEventListener('click', () => { const open = $('#navigation').classList.toggle('open'); menu.setAttribute('aria-expanded', String(open)); });
 $('#navigation').querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') { closeMenu(); menu.focus(); } });
 function textElement(tag, className, text) { const el = document.createElement(tag); el.className = className; el.textContent = text; return el; }
 function safeUrl(value) { try { const u = new URL(value); return ['https:', 'http:'].includes(u.protocol) ? u.href : null; } catch { return null; } }
 function safeImage(value) { return typeof value === 'string' && /^images\/[a-zA-Z0-9_./-]+$/.test(value) && !value.includes('..') ? value : safeUrl(value); }
 if (data.whatsapp && /^\+?[0-9]{8,15}$/.test(data.whatsapp)) { const url = `https://wa.me/${data.whatsapp.replace(/\D/g, '')}`; const profile = (data.links || []).find(link => link.label === 'WhatsApp'); if (profile) profile.url = url; }
 for (const target of ['#hero-socials', '#contact-socials']) {
+  $(target).replaceChildren();
   (data.links || []).forEach(profile => { const url = safeUrl(profile.url); if (!url) return; const link = textElement('a', '', `${profile.label} ↗`); link.href = url; link.target = '_blank'; link.rel = 'noopener noreferrer'; $(target).append(link); });
 }
 (data.skills || []).forEach((skill, index) => { const card = document.createElement('article'); card.append(textElement('span', 'skill-index', String(index + 1).padStart(2, '0')), textElement('h3', '', skill.name), textElement('p', '', skill.description)); $('#skills-grid').append(card); });
@@ -108,12 +110,13 @@ data.timeline.forEach((chapter, index) => {
 });
 const chapters = [...document.querySelectorAll('.year-chapter')];
 const tabs = [...$('#year-tabs').children];
+let activeChapter = -1;
 function updateScroll() {
   if (!manualTheme) setTheme(window.scrollY > window.innerHeight * .18);
   let current = 0;
   const line = window.innerWidth <= 650 ? 360 : window.innerHeight * .55;
   chapters.forEach((chapter, i) => { if (chapter.getBoundingClientRect().top < line) current = i; });
-  if (chapters[current]) { $('#year-display').textContent = chapters[current].dataset.year; tabs.forEach((tab, i) => { tab.classList.toggle('active', i === current); tab.setAttribute('aria-pressed', String(i === current)); }); }
+  if (chapters[current] && current !== activeChapter) { activeChapter = current; $('#year-display').textContent = chapters[current].dataset.year; tabs.forEach((tab, i) => { tab.classList.toggle('active', i === current); tab.setAttribute('aria-pressed', String(i === current)); }); }
 }
 let ticking = false;
 window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { updateScroll(); ticking = false; }); } }, { passive: true });
@@ -128,3 +131,8 @@ $('.contact-actions').after(contactDetails);
 if (!emailValid()) { $('#copy-email').hidden = true; if (githubProfile) { $('#contact-button').textContent = 'Connect on GitHub '; $('#contact-button').append(textElement('span', '', '↗')); } }
 $('#contact-button').addEventListener('click', () => { if (emailValid()) location.href = `mailto:${encodeURIComponent(data.email)}`; else if (githubProfile) window.open(safeUrl(githubProfile.url), '_blank', 'noopener,noreferrer'); else $('#contact-status').textContent = missingEmail; });
 $('#copy-email').addEventListener('click', async () => { if (!emailValid()) { $('#contact-status').textContent = missingEmail; return; } try { await navigator.clipboard.writeText(data.email); $('#contact-status').textContent = 'Email copied. Let’s make something happen.'; } catch { $('#contact-status').textContent = `Email: ${data.email}`; } });
+
+if (data.about) { $('#about-heading').textContent = data.about.heading; $('#about-summary').textContent = data.about.summary; for (const [key,label] of [['location','Based in'],['education','Education'],['languages','Languages']]) { if (!data.about[key]) continue; $('#about-facts').append(textElement('dt','',label),textElement('dd','',data.about[key])); } } else $('#about').hidden = true;
+if (typeof data.resume === 'string' && (/^documents\/[a-zA-Z0-9_-]+\.pdf$/.test(data.resume) || safeUrl(data.resume))) { for (const target of ['.hero-actions','.contact-actions']) { const link = $(target).querySelector('.resume-link') || textElement('a','resume-link','Download CV ↓'); link.href = data.resume; link.download = 'Usman-Abid-CV.pdf'; if (!link.isConnected) $(target).append(link); } }
+
+if (!(typeof data.resume === 'string' && (/^documents\/[a-zA-Z0-9_-]+\.pdf$/.test(data.resume) || safeUrl(data.resume)))) document.querySelectorAll('.resume-link').forEach(link => link.remove());
