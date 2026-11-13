@@ -1,5 +1,3 @@
-<p align="center"><img src="dist/usman-dev-logo.png" width="160" alt="Usman Dev — Full-Stack Developer" /></p>
-
 # Usman Dev — Developer Portfolio
 
 A responsive personal portfolio built with **HTML, CSS and JavaScript**. Explore project galleries, skills and the work behind each door. Includes a form-based Portfolio Studio for keeping content up to date.
@@ -20,19 +18,9 @@ A responsive personal portfolio built with **HTML, CSS and JavaScript**. Explore
 - Keyboard navigation, responsive layouts, accessible labels and reduced-motion support.
 - Static hosting: no server, database or runtime dependency required.
 
-## Project visuals
+## Project gallery
 
-These are original source-based documentation illustrations, not screenshots of running applications.
-
-| Malik Oil Store | SKV Construction |
-| --- | --- |
-| ![Malik Oil Store overview](dist/images/projects/malik-oil-store/01-cover.svg) | ![SKV Construction overview](dist/images/projects/SKV/01-cover.svg) |
-
-| CAM — development preview | Malik Oil — Android workspace |
-| --- | --- |
-| ![CAM overview](dist/images/projects/CAM/01-cover.svg) | ![Malik Oil Android overview](dist/images/projects/Malik-Oil/01-cover.svg) |
-
-Each project's `dist/images/projects/` folder includes overview, features, architecture, workflow and technology visuals.
+The portfolio includes source-based visual guides for [Malik Oil Store](dist/images/projects/malik-oil-store/), [SKV Construction](dist/images/projects/SKV/), [CAM](dist/images/projects/CAM/) and [Malik Oil Android](dist/images/projects/Malik-Oil/). These are documentation illustrations, not screenshots of running applications.
 
 ## Run locally
 
